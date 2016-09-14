@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         listViewPrevisaoTempo = (ListView) findViewById(R.id.listview_forecast);
 
-        this.obterPreferenciasUusario();
+        this.obterPreferenciasUsuario();
 
         //Método de pesquisa previsão do tempo baseado na localidade
         this.pesquisarPrevisaoTempo(localidade, metrica);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
 
-        this.obterPreferenciasUusario();
+        this.obterPreferenciasUsuario();
 
         this.pesquisarPrevisaoTempo(localidade, metrica);
 
@@ -199,7 +200,9 @@ public class MainActivity extends AppCompatActivity {
 
         listaPrevisaoTempo = new ArrayList<>();
         String[] previsoesTempo = this.buscarDadosMeteorologicos(localidade, metrica);
-        if (previsoesTempo != null) {
+        if(previsoesTempo == null){
+            Toast.makeText(this, R.string.error_search, Toast.LENGTH_LONG).show();;
+        }else{
             for (String p : previsoesTempo) {
                 listaPrevisaoTempo.add(p);
             }
@@ -258,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public void obterPreferenciasUusario() {
+    public void obterPreferenciasUsuario() {
         //Preferencias selecionadas pelo usuário
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         //Localidade - Nome da cidade

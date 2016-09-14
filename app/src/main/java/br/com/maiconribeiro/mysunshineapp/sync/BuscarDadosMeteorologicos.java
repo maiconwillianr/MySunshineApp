@@ -98,11 +98,10 @@ public class BuscarDadosMeteorologicos extends AsyncTask<String, Void, String[]>
                 }
 
                 if (buffer.length() == 0) {
-                    // Stream was empty.  No point in parsing.
                     forecastJsonStr = null;
+                }else{
+                    forecastJsonStr = buffer.toString();
                 }
-
-                forecastJsonStr = buffer.toString();
 
             } catch (IOException e) {
                 Log.e("PlaceholderFragment", "Error ", e);
@@ -124,7 +123,12 @@ public class BuscarDadosMeteorologicos extends AsyncTask<String, Void, String[]>
 
             try {
 
-                return getWeatherDataFromJson(forecastJsonStr, Integer.valueOf(DAYS_VALUE).intValue());
+                if(forecastJsonStr != null){
+                    return getWeatherDataFromJson(forecastJsonStr, Integer.valueOf(DAYS_VALUE).intValue());
+                }else{
+                    return null;
+                }
+
 
             } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);

@@ -2,6 +2,7 @@
     <string name="app_name">MySunshineApp</string>
     <string name="refresh">Refresh</string>
     <string name="action_search">Pesquisar</string>
+    <string name="error_search">Favor verifique a localidade informada</string>
     <string name="action_settings">Configurações</string>
     <string name="title_activity_settings">Configurações</string>
 
