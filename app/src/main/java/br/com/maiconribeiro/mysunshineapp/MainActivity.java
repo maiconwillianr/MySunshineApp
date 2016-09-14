@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
@@ -103,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem menuItem = menu.findItem(R.id.action_search);
+        MenuItem itemSearch = menu.findItem(R.id.action_search);
 
-        searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView = (SearchView) MenuItemCompat.getActionView(itemSearch);
 
         searchView.setSuggestionsAdapter(new SimpleCursorAdapter(
                 this, android.R.layout.simple_list_item_1, null,
@@ -141,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        MenuItem itemShare = menu.findItem(R.id.action_share);
+
+        ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(itemShare);
+
+        mShareActionProvider.setShareIntent(createShareForecastIntent());
 
         return true;
     }
@@ -194,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if(id == R.id.action_maps){
+        if (id == R.id.action_maps) {
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("geo:0,0?q=");
@@ -211,16 +217,31 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_share) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(listaPrevisaoTempo.get(0));
+            stringBuilder.append(getString(R.string.share_message));
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        }
+
         return super.onOptionsItemSelected(item);
+
     }
 
     private void pesquisarPrevisaoTempo(String localidade, String metrica) {
 
         listaPrevisaoTempo = new ArrayList<>();
         String[] previsoesTempo = this.buscarDadosMeteorologicos(localidade, metrica);
-        if(previsoesTempo == null){
-            Toast.makeText(this, R.string.error_search, Toast.LENGTH_LONG).show();;
-        }else{
+        if (previsoesTempo == null) {
+            Toast.makeText(this, R.string.error_search, Toast.LENGTH_LONG).show();
+            ;
+        } else {
             for (String p : previsoesTempo) {
                 listaPrevisaoTempo.add(p);
             }
@@ -294,6 +315,18 @@ public class MainActivity extends AppCompatActivity {
             //Obtém a métrica deafult
             metrica = getString(R.string.pref_metric_default);
         }
+    }
+
+    private Intent createShareForecastIntent() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(listaPrevisaoTempo.get(0));
+        stringBuilder.append(getString(R.string.share_message));
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
+        return shareIntent;
     }
 
 }

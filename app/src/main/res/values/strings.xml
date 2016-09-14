@@ -3,6 +3,8 @@
     <string name="refresh">Refresh</string>
     <string name="action_search">Pesquisar</string>
     <string name="action_map">Mapa</string>
+    <string name="action_share">Compartilhe</string>
+    <string name="share_message">#MySunshineApp</string>
     <string name="error_search">Favor verifique a localidade informada</string>
     <string name="action_settings">Configurações</string>
     <string name="title_activity_settings">Configurações</string>
