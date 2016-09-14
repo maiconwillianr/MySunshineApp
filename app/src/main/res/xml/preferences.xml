@@ -18,7 +18,7 @@
             android:defaultValue="1"
             android:entries="@array/listMetrics"
             android:entryValues="@array/listMetricsValues"
-            android:key="metricType"
+            android:key="@string/pref_metric_key"
             android:summary="Selecione o tipo de métrica a ser utilizado"
             android:title="Tipos de Métrica" />
 

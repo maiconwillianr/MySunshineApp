@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
@@ -193,6 +194,23 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if(id == R.id.action_maps){
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("geo:0,0?q=");
+            stringBuilder.append(localidade);
+
+            Uri gmmIntentUri = Uri.parse(stringBuilder.toString());
+
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+            mapIntent.setPackage("com.google.android.apps.maps");
+
+            startActivity(mapIntent);
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -271,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
             localidade = getString(R.string.pref_location_default);
         }
         //Métrica Celsius ou Fahrenheit
-        metrica = settings.getString(getString(R.string.pref_location_key), getString(R.string.pref_metric_default));
+        metrica = settings.getString(getString(R.string.pref_metric_key), getString(R.string.pref_metric_default));
         if (metrica == null || metrica.equals("")) {
             //Obtém a métrica deafult
             metrica = getString(R.string.pref_metric_default);

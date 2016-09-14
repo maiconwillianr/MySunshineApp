@@ -10,6 +10,12 @@
         android:title="@string/action_search" />
 
     <item
+        android:id="@+id/action_maps"
+        android:icon="@drawable/ic_action_map"
+        app:showAsAction="ifRoom"
+        android:title="@string/action_map" />
+
+    <item
         android:id="@+id/action_settings"
         app:showAsAction="never"
         android:title="@string/action_settings" />

@@ -5,7 +5,6 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -56,10 +55,6 @@ public class SettingsActivity extends PreferenceActivity {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
-
-                SharedPreferences.Editor editor = context.getSharedPreferences(PREFS_LOCATION, MODE_PRIVATE).edit();
-                editor.putString(context.getString(R.string.pref_location_key), stringValue);
-                editor.apply();
 
             }
             return true;
@@ -134,6 +129,7 @@ public class SettingsActivity extends PreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
+            bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_metric_key)));
 
         }
 

@@ -2,6 +2,7 @@
     <string name="app_name">MySunshineApp</string>
     <string name="refresh">Refresh</string>
     <string name="action_search">Pesquisar</string>
+    <string name="action_map">Mapa</string>
     <string name="error_search">Favor verifique a localidade informada</string>
     <string name="action_settings">Configurações</string>
     <string name="title_activity_settings">Configurações</string>
@@ -17,19 +18,17 @@
     <!-- Default postal code for location preference [CHAR LIMIT=NONE] -->
     <string name="pref_location_default" translatable="false">Curitiba</string>
 
-    <string name="pref_metric_title">Métricas</string>
-
     <!-- Métrica Default -->
+    <string name="pref_metric_key" translatable="false">metric</string>
+    <string name="pref_metric_title">Métricas</string>
     <string name="pref_metric_default" translatable="false">metric</string>
-
     <string-array name="listMetrics">
         <item>Celsius</item>
         <item>Fahrenheit</item>
     </string-array>
-
     <string-array name="listMetricsValues">
-        <item>1</item>
-        <item>2</item>
+        <item>metric</item>
+        <item>imperial</item>
     </string-array>
 
 </resources>

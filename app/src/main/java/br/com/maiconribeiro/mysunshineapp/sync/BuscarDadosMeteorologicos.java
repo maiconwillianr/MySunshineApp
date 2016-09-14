@@ -61,7 +61,7 @@ public class BuscarDadosMeteorologicos extends AsyncTask<String, Void, String[]>
             }
 
             String localidade = params[0];
-            String metrica = params[1];
+            UNITS_VALUE = params[1];
 
             this.createUrl(localidade);
 
