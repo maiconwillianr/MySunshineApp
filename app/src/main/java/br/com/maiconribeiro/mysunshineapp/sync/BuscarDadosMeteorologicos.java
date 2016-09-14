@@ -82,7 +82,7 @@ public class BuscarDadosMeteorologicos extends AsyncTask<String, Void, String[]>
 
                 // Read the input stream into a String
                 InputStream inputStream = urlConnection.getInputStream();
-                StringBuffer buffer = new StringBuffer();
+                StringBuilder buffer = new StringBuilder();
                 if (inputStream == null) {
                     // Nothing to do.
                     forecastJsonStr = null;
@@ -124,7 +124,7 @@ public class BuscarDadosMeteorologicos extends AsyncTask<String, Void, String[]>
             try {
 
                 if(forecastJsonStr != null){
-                    return getWeatherDataFromJson(forecastJsonStr, Integer.valueOf(DAYS_VALUE).intValue());
+                    return getWeatherDataFromJson(forecastJsonStr, Integer.valueOf(DAYS_VALUE));
                 }else{
                     return null;
                 }

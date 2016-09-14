@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference android:title="Your Name"
-        android:key="username"
-        android:summary="Please provide your username"></EditTextPreference>
+    <PreferenceCategory android:title="@string/pref_location_title">
 
-    <CheckBoxPreference android:title="Application Updates"
-        android:defaultValue="false"
-        android:summary="This option if selected will allow the application to check for latest versions."
-        android:key="applicationUpdates" />
+        <EditTextPreference
+            android:defaultValue="@string/pref_location_default"
+            android:inputType="text"
+            android:key="@string/pref_location_key"
+            android:singleLine="true"
+            android:title="@string/pref_location_label" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_metric_title">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/listMetrics"
+            android:entryValues="@array/listMetricsValues"
+            android:key="metricType"
+            android:summary="Selecione o tipo de métrica a ser utilizado"
+            android:title="Tipos de Métrica" />
+
+    </PreferenceCategory>
+
 
 </PreferenceScreen>
